@@ -3,11 +3,11 @@ import Sidebar from '../ui/dashboard/sidebar/sidebar';
 
 const Layout = ({ children }) => {
   return (
-    <div>
-      <div>
+    <div className="flex">
+      <div className="min-h-screen w-3/12 p-3">
         <Sidebar />
       </div>
-      <div>
+      <div className="w-full p-3">
         <Navbar />
         {children}
       </div>
