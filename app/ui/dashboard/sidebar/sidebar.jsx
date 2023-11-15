@@ -12,6 +12,7 @@ import {
 } from 'react-icons/md';
 import Image from 'next/image';
 import MenuLink from './menuLink/menuLink';
+import { auth, signOut } from '@/app/auth';
 
 const menuItems = [
   {
@@ -75,14 +76,16 @@ const menuItems = [
     ],
   },
 ];
-const Sidebar = () => {
+const Sidebar = async () => {
+  const { user } = await auth();
+
   return (
     <div className="sticky top-10">
       <div className="mb-4 flex items-center gap-5">
         <Image className="rounded-full" src={'/noavatar.png'} alt="" width="50" height="50" />
         <div className="flex	 flex-col">
-          <span className="font-medium">sd</span>
-          <span className="text-sm">Administrator</span>
+          <span className="font-medium">{user.username}</span>
+          <span className="text-sm">用户</span>
         </div>
       </div>
       <ul className="list-none">
@@ -98,13 +101,13 @@ const Sidebar = () => {
       <form
         action={async () => {
           'use server';
-          // await signOut();
+          await signOut();
         }}
       >
-        {/* <button className={styles.logout}>
+        <button className="flex w-full items-center border-none bg-none p-4">
           <MdLogout />
-          Logout
-        </button> */}
+          &nbsp; 登出
+        </button>
       </form>
     </div>
   );
