@@ -1,30 +1,26 @@
 'use client';
-
 import { authenticate } from '@/app/lib/actions';
-import React from 'react';
-import { useForm, useFormState } from 'react-hook-form';
+import { useFormState } from 'react-dom';
 
-const inputClass = 'w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500';
-const buttonClass = 'w-full p-3 border-none cursor-pointer rounded-lg bg-blue-500 text-white font-bold';
 const LoginForm = () => {
-  const { register, handleSubmit, control } = useForm();
-  const { errors } = useFormState(); // 使用 useFormState
+  const [state, formAction] = useFormState(authenticate, undefined);
 
-  const onSubmit = (data) => {
-    console.log(data);
-  };
+  const inputClass = 'w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500';
+  const buttonClass = 'w-full p-3 border-none cursor-pointer rounded-lg bg-blue-500 text-white font-bold';
+
   return (
     <form
-      onSubmit={handleSubmit(onSubmit)}
+      action={formAction}
       className="round-lg flex h-[500px] w-[500px] flex-col items-center justify-center gap-4 bg-white p-5"
     >
-      <h1>Login</h1>
-      <input type="text" placeholder="username" name="username" className={inputClass} {...register('username')} />
-      <input type="password" placeholder="password" name="password" className={inputClass} {...register('password')} />
+      <h1>登录</h1>
+      <input type="text" required placeholder="username" name="username" className={inputClass} />
+      <input type="password" placeholder="password" name="password" className={inputClass} required />
+      {state && state}
+
       <button className={buttonClass} type="submit">
-        Login
+        登录
       </button>
-      {/* {state && state} */}
     </form>
   );
 };

@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import styles from './transactions.module.css';
 
 const Transactions = () => {
